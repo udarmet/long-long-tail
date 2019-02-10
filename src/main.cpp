@@ -1,19 +1,27 @@
-#include <iostream>
-#include <SFML/Graphics.hpp>
-
-
-using namespace std;
+#include "common/Model.h"
+#include "common/View.h"
+#include "common/KeyboardController.h"
+#include "common/ModulesSequence.h"
+#include "common/Scheduler.h"
 
 
 int main(int argc, char* argv[])
 {
-    sf::Window App(sf::VideoMode(800, 600), "myproject");
-    while (App.isOpen()) {
-        sf::Event Event;
-        while (App.pollEvent(Event)) {
-            if (Event.type == sf::Event::Closed)
-                App.close();
-        }
-        App.display();
-    }
+    Model model;
+
+    View view;
+    view.observe(model);
+
+    KeyboardController controller;
+    controller.manipulate(model);
+
+    ModulesSequence game;
+    game.append(controller);
+    game.append(model);
+    game.append(view);
+
+    Scheduler scheduler;
+    scheduler.addPeriodicModule(game, 1 / 60.0);
+    return scheduler.run();
 }
+
