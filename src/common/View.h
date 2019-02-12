@@ -3,7 +3,7 @@
 
 
 #include "Module.h"
-#include "ModelObserverItf.h"
+#include "Model.h"
 
 
 class View : public Module, public ModelObserverItf

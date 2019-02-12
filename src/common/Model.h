@@ -4,8 +4,29 @@
 
 #include <vector>
 #include "Module.h"
-#include "ModelObserverItf.h"
-#include "ModelControllerItf.h"
+
+
+class Model;
+
+
+class ModelObserverItf
+{
+public:
+
+    void observe(Model& model);
+};
+
+
+class ModelControllerItf
+{
+public:
+
+    void manipulate(Model& model);
+
+protected:
+
+    Model* m_model;
+};
 
 
 class Model : public Module

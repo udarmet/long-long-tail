@@ -18,8 +18,6 @@ set (HEADERS
     src/common/ModulesSequence.h
     src/common/Scheduler.h
     src/common/Model.h
-    src/common/ModelObserverItf.h
-    src/common/ModelControllerItf.h
     src/common/View.h
     src/common/KeyboardController.h)
 

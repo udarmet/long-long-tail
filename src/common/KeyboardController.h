@@ -3,7 +3,7 @@
 
 
 #include "Module.h"
-#include "ModelControllerItf.h"
+#include "Model.h"
 
 
 class KeyboardController : public Module, public ModelControllerItf
