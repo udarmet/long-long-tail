@@ -2,13 +2,15 @@
 #define VIEW_H
 
 
-#include "ModuleItf.h"
+#include "Module.h"
 #include "ModelObserverItf.h"
 
 
-class View : public ModuleItf, public ModelObserverItf
+class View : public Module, public ModelObserverItf
 {
+public:
 
+    void loop() override;
 };
 
 

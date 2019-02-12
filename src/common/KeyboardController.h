@@ -2,13 +2,15 @@
 #define KEYBOARD_CONTROLLER_H
 
 
-#include "ModuleItf.h"
+#include "Module.h"
 #include "ModelControllerItf.h"
 
 
-class KeyboardController : public ModuleItf, public ModelControllerItf
+class KeyboardController : public Module, public ModelControllerItf
 {
+public:
 
+    void loop() override;
 };
 
 

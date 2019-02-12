@@ -6,6 +6,7 @@ set (CMAKE_CXX_STANDARD 14)
 
 # List source files
 set (SOURCES
+    src/common/Module.cpp
     src/common/ModulesSequence.cpp
     src/common/Scheduler.cpp
     src/common/Model.cpp
@@ -13,7 +14,7 @@ set (SOURCES
     src/common/KeyboardController.cpp
     src/main.cpp)
 set (HEADERS
-    src/common/ModuleItf.h
+    src/common/Module.h
     src/common/ModulesSequence.h
     src/common/Scheduler.h
     src/common/Model.h

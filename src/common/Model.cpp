@@ -12,3 +12,8 @@ void ModelControllerItf::manipulate(Model &model)
     m_model = &model;
 }
 
+
+void Model::loop()
+{
+}
+

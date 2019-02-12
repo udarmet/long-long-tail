@@ -3,22 +3,20 @@
 
 
 #include <vector>
-#include "ModuleItf.h"
+#include "Module.h"
 
 
-class ModulesSequence : public ModuleItf
+class ModulesSequence : public Module
 {
 public:
 
-    bool setup() override;
     void loop() override;
-    void teardown() override;
 
-    void append(ModuleItf& module);
+    void append(Module& module);
 
 protected:
 
-    std::vector<ModuleItf*> m_modules;
+    std::vector<Module*> m_modules;
 };
 
 

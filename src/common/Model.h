@@ -3,13 +3,17 @@
 
 
 #include <vector>
-#include "ModuleItf.h"
+#include "Module.h"
 #include "ModelObserverItf.h"
 #include "ModelControllerItf.h"
 
 
-class Model : public ModuleItf
+class Model : public Module
 {
+public:
+
+    void loop() override;
+
 protected:
 
     std::vector<ModelObserverItf*> m_observers;
