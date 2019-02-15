@@ -2,8 +2,8 @@
 #define VIEW_H
 
 
-#include "Module.h"
-#include "Model.h"
+#include "../scheduler/Module.h"
+#include "../model/Model.h"
 
 
 class View : public Module, public ModelObserverItf

@@ -3,7 +3,7 @@
 
 
 #include <vector>
-#include "Module.h"
+#include "../scheduler/Module.h"
 
 
 class Model;

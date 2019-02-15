@@ -6,20 +6,20 @@ set (CMAKE_CXX_STANDARD 14)
 
 # List source files
 set (SOURCES
-    src/common/Module.cpp
-    src/common/ModulesSequence.cpp
-    src/common/Scheduler.cpp
-    src/common/Model.cpp
-    src/common/View.cpp
-    src/common/KeyboardController.cpp
+    src/common/scheduler/Module.cpp
+    src/common/scheduler/ModulesSequence.cpp
+    src/common/scheduler/Scheduler.cpp
+    src/common/model/Model.cpp
+    src/common/view/View.cpp
+    src/common/controller/KeyboardController.cpp
     src/main.cpp)
 set (HEADERS
-    src/common/Module.h
-    src/common/ModulesSequence.h
-    src/common/Scheduler.h
-    src/common/Model.h
-    src/common/View.h
-    src/common/KeyboardController.h)
+    src/common/scheduler/Module.h
+    src/common/scheduler/ModulesSequence.h
+    src/common/scheduler/Scheduler.h
+    src/common/model/Model.h
+    src/common/view/View.h
+    src/common/controller/KeyboardController.h)
 
 # List external libraries
 find_package (SFML 2.5 COMPONENTS graphics REQUIRED)

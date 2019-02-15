@@ -1,9 +1,9 @@
 #include <iostream>
-#include "common/Model.h"
-#include "common/View.h"
-#include "common/KeyboardController.h"
-#include "common/ModulesSequence.h"
-#include "common/Scheduler.h"
+#include "common/model/Model.h"
+#include "common/view/View.h"
+#include "common/controller/KeyboardController.h"
+#include "common/scheduler/ModulesSequence.h"
+#include "common/scheduler/Scheduler.h"
 
 
 int main(int argc, char* argv[])

@@ -2,8 +2,8 @@
 #define KEYBOARD_CONTROLLER_H
 
 
-#include "Module.h"
-#include "Model.h"
+#include "../scheduler/Module.h"
+#include "../model/Model.h"
 
 
 class KeyboardController : public Module, public ModelControllerItf

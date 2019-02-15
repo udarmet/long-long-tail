@@ -3,8 +3,8 @@
 #include <chrono>
 #include <ctime>
 #include <iomanip>
-#include "../../src/common/Module.h"
-#include "../../src/common/Scheduler.h"
+#include "../../src/common/scheduler/Module.h"
+#include "../../src/common/scheduler/Scheduler.h"
 
 
 class CuckooClock : public Module
