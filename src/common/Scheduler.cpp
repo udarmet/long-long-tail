@@ -3,15 +3,14 @@
 
 Scheduler::PeriodicModuleData::PeriodicModuleData(Module& module_, double period_) :
     module(&module_),
-    period(static_cast<long>(period_ * 1e9)),
-    last(std::chrono::steady_clock::now() - period)
+    period(static_cast<long>(period_ * 1e9))
 {
 }
 
 
-bool Scheduler::PeriodicModuleData::operator<(const PeriodicModuleData& other) const
+bool Scheduler::PeriodicModuleData::Compare::operator()(const PeriodicModuleData* left, const PeriodicModuleData* right)
 {
-    return (last + period) >= (other.last + other.period);
+    return (left->last + left->period) > (right->last + right->period);
 }
 
 
@@ -23,29 +22,40 @@ Scheduler::Scheduler() :
 
 void Scheduler::addPeriodicModule(Module& module, double period)
 {
-    m_periodicModules.emplace(module, period);
+    m_periodicModules.emplace_back(module, period);
     becomeParentOf(module);
-}
-
-
-void Scheduler::loop()
-{
-    PeriodicModuleData pmodule = m_periodicModules.top();
-    std::this_thread::sleep_until(pmodule.last + pmodule.period);
-    pmodule.module->loop();
-    pmodule.last += pmodule.period;
-    m_periodicModules.pop();
-    m_periodicModules.push(pmodule);
 }
 
 
 int Scheduler::run()
 {
+    setup();
     m_isRunning = true;
     while (m_isRunning) {
         loop();
     }
     return 0;
+}
+
+
+void Scheduler::setup()
+{
+    std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
+    for (PeriodicModuleData& periodicModule : m_periodicModules) {
+        periodicModule.last = now - periodicModule.period;
+        m_periodicModulesSequencer.push(&periodicModule);
+    }
+}
+
+
+void Scheduler::loop()
+{
+    PeriodicModuleData* pmodule = m_periodicModulesSequencer.top();
+    std::this_thread::sleep_until(pmodule->last + pmodule->period);
+    pmodule->module->loop();
+    pmodule->last += pmodule->period;
+    m_periodicModulesSequencer.pop();
+    m_periodicModulesSequencer.push(pmodule);
 }
 
 
