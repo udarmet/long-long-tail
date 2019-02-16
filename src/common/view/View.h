@@ -10,7 +10,7 @@ class View : public Module, public ModelObserverItf
 {
 public:
 
-    void loop() override;
+    void update(double dt) override;
 };
 
 

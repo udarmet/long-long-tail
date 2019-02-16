@@ -13,7 +13,7 @@ public:
 
     CuckooClock(const std::string name) : m_name(name) {}
 
-    void loop() override
+    void update(double dt) override
     {
         std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
         std::time_t now_c = std::chrono::system_clock::to_time_t(now);

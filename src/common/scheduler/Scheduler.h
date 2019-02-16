@@ -26,19 +26,17 @@ protected:
 
     struct PeriodicModuleData
     {
-        PeriodicModuleData(Module& module_, double period_);
-
-        struct Compare {
+        struct ComparePtr {
             bool operator()(const PeriodicModuleData* left, const PeriodicModuleData* right);
         };
 
         Module* module;
         std::chrono::nanoseconds period;
-        std::chrono::steady_clock::time_point last;
+        std::chrono::steady_clock::time_point deadline;
     };
 
-    void setup();
-    void loop() override;
+    void init();
+    void update(double dt) override;
 
     void handleSignal(Signal signal) override;
 
@@ -46,7 +44,7 @@ protected:
     std::priority_queue<
         PeriodicModuleData*,
         std::vector<PeriodicModuleData*>,
-        PeriodicModuleData::Compare> m_periodicModulesSequencer;
+        PeriodicModuleData::ComparePtr> m_periodicModulesSequencer;
     std::atomic_bool m_isRunning;
 };
 

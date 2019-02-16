@@ -1,7 +1,7 @@
 #include "View.h"
 
 
-void View::loop()
+void View::update(double dt)
 {
 }
 

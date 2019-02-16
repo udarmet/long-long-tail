@@ -1,16 +1,9 @@
 #include "Scheduler.h"
 
 
-Scheduler::PeriodicModuleData::PeriodicModuleData(Module& module_, double period_) :
-    module(&module_),
-    period(static_cast<long>(period_ * 1e9))
+bool Scheduler::PeriodicModuleData::ComparePtr::operator()(const PeriodicModuleData* left, const PeriodicModuleData* right)
 {
-}
-
-
-bool Scheduler::PeriodicModuleData::Compare::operator()(const PeriodicModuleData* left, const PeriodicModuleData* right)
-{
-    return (left->last + left->period) > (right->last + right->period);
+    return left->deadline > right->deadline;
 }
 
 
@@ -22,40 +15,43 @@ Scheduler::Scheduler() :
 
 void Scheduler::addPeriodicModule(Module& module, double period)
 {
-    m_periodicModules.emplace_back(module, period);
+    PeriodicModuleData periodicModule;
+    periodicModule.module = &module;
+    periodicModule.period = std::chrono::nanoseconds(static_cast<long>(period * 1e9));
+    m_periodicModules.push_back(periodicModule);
     becomeParentOf(module);
 }
 
 
 int Scheduler::run()
 {
-    setup();
+    init();
     m_isRunning = true;
     while (m_isRunning) {
-        loop();
+        update(-1);
     }
     return 0;
 }
 
 
-void Scheduler::setup()
+void Scheduler::init()
 {
     std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
     for (PeriodicModuleData& periodicModule : m_periodicModules) {
-        periodicModule.last = now - periodicModule.period;
+        periodicModule.deadline = now;
         m_periodicModulesSequencer.push(&periodicModule);
     }
 }
 
 
-void Scheduler::loop()
+void Scheduler::update(double)
 {
-    PeriodicModuleData* pmodule = m_periodicModulesSequencer.top();
-    std::this_thread::sleep_until(pmodule->last + pmodule->period);
-    pmodule->module->loop();
-    pmodule->last += pmodule->period;
+    PeriodicModuleData* nextModulePtr = m_periodicModulesSequencer.top();
+    std::this_thread::sleep_until(nextModulePtr->deadline);
+    nextModulePtr->module->update(nextModulePtr->period.count() * 1e-9);
+    nextModulePtr->deadline += nextModulePtr->period;
     m_periodicModulesSequencer.pop();
-    m_periodicModulesSequencer.push(pmodule);
+    m_periodicModulesSequencer.push(nextModulePtr);
 }
 
 

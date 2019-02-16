@@ -1,10 +1,10 @@
 #include "ModulesSequence.h"
 
 
-void ModulesSequence::loop()
+void ModulesSequence::update(double dt)
 {
     for (Module* module : m_modules) {
-        module->loop();
+        module->update(dt);
     }
 }
 

@@ -10,7 +10,7 @@ class ModulesSequence : public Module
 {
 public:
 
-    void loop() override;
+    void update(double dt) override;
 
     void append(Module& module);
 

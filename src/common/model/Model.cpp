@@ -13,7 +13,7 @@ void ModelControllerItf::manipulate(Model &model)
 }
 
 
-void Model::loop()
+void Model::update(double dt)
 {
 }
 

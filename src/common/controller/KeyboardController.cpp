@@ -1,7 +1,7 @@
 #include "KeyboardController.h"
 
 
-void KeyboardController::loop()
+void KeyboardController::update(double dt)
 {
 }
 

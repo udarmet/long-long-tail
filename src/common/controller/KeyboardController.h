@@ -10,7 +10,7 @@ class KeyboardController : public Module, public ModelControllerItf
 {
 public:
 
-    void loop() override;
+    void update(double dt) override;
 };
 
 

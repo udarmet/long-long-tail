@@ -33,7 +33,7 @@ class Model : public Module
 {
 public:
 
-    void loop() override;
+    void update(double dt) override;
 
 protected:
 
