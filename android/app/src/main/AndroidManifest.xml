@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.gmail.darmet.ulysse"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-feature android:glEsVersion="0x00010001" />
+
+    <uses-sdk android:minSdkVersion="14"
+              android:targetSdkVersion="19" />
+
+    <application android:label="@string/label"
+                 android:icon="@drawable/icon"
+                 android:hasCode="false"
+                 android:allowBackup="true">
+
+    <activity android:name="android.app.NativeActivity"
+              android:label="@string/label"
+              android:icon="@drawable/icon"
+              android:configChanges="keyboardHidden|orientation|screenSize">
+
+        <meta-data android:name="android.app.lib_name" android:value="sfml-activity-d" />
+        <meta-data android:name="sfml.app.lib_name" android:value="long-long-tail-android" />
+
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+    </application>
+</manifest>
