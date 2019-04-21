@@ -7,11 +7,11 @@ int main(int argc, char* argv[])
 {
     sf::VideoMode videoMode(640, 480);
 
-    sf::RenderWindow window(videoMode, "Long Long Tail!", sf::Style::Close);
-    window.setFramerateLimit(60);
-
     sf::View view(sf::Vector2f(), sf::Vector2f(320, 240));
+
+    sf::RenderWindow window(videoMode, "Long Long Tail!", sf::Style::Close);
     window.setView(view);
+    window.setFramerateLimit(60);
 
     sf::Color background = sf::Color::Black;
 

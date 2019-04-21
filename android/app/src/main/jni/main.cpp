@@ -3,15 +3,13 @@
 #include <SFML/Graphics.hpp>
 
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
     sf::VideoMode videoMode(sf::VideoMode::getDesktopMode());
 
-    sf::RenderWindow window(videoMode, "Long Long Tail!");
-    window.setFramerateLimit(60);
+    sf::View view(sf::Vector2f(), sf::Vector2f(240.0, 240.0 / videoMode.width * videoMode.height));
 
-    sf::View view(sf::Vector2f(), sf::Vector2f(240, 320));
-    window.setView(view);
+    sf::RenderWindow window(videoMode, "");
 
     sf::Color background = sf::Color::Black;
 
@@ -23,17 +21,32 @@ int main(int argc, char *argv[])
     image.setPosition(0.0, 0.0);
     image.setOrigin(texture.getSize().x / 2, texture.getSize().y / 2);
 
+    bool isActive = true;
     while (window.isOpen()) {
 
         sf::Event event;
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
+        while (isActive ? window.pollEvent(event) : window.waitEvent(event)) {
+            switch (event.type) {
+            case sf::Event::Closed:
                 window.close();
+                break;
+            case sf::Event::MouseLeft:
+                isActive = false;
+                break;
+            case sf::Event::MouseEntered:
+                isActive = true;
+                window.create(videoMode, "");
+                window.setView(view);
+                window.setFramerateLimit(60);
+                break;
+            }
         }
 
-        window.clear(background);
-        window.draw(image);
-        window.display();
+        if (isActive) {
+            window.clear(background);
+            window.draw(image);
+            window.display();
+        }
     }
 }
 
