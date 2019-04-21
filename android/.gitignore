@@ -3,6 +3,6 @@ local.properties
 .gradle
 build
 android.iml
-app/build
-app/.externalNativeBuild
-app/src/main/obj
+src/build
+src/.externalNativeBuild
+src/obj

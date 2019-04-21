@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
     sf::Color background = sf::Color::Black;
 
     sf::Texture texture;
-    if(!texture.loadFromFile("assets/logo.png"))
+    if(!texture.loadFromFile("resources/logo.png"))
         return EXIT_FAILURE;
 
     sf::Sprite image(texture);

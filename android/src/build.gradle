@@ -25,10 +25,14 @@ android {
             minifyEnabled false
         }
     }
+    sourceSets.main {
+        manifest.srcFile "AndroidManifest.xml"
+        assets.srcDir "../../resources"
+        res.srcDir "res"
+    }
     externalNativeBuild {
         ndkBuild {
-            path "src/main/jni/Android.mk"
-
+            path "jni/Android.mk"
         }
     }
 }
